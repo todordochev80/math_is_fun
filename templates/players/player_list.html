@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <header>
+        <h1>👤 Heroes 👤</h1>
+        <p>Choose your hero or add a new one!</p>
+    </header>
+
+    <main class="menu-list">
+        {% for player in players %}
+            <div class="nav-btn math-btn" style="justify-content: space-between; padding: 15px 30px; width: 100%; max-width: 450px;">
+                <span>🌟 {{ player.name }}</span>
+                <div style="display: flex; gap: 15px;">
+                    <span title="Age">🎂 {{ player.age }}</span>
+                </div>
+            </div>
+        {% empty %}
+            <p style="font-size: 1.5rem; color: #545454;">No heroes found! 😮</p>
+        {% endfor %}
+
+        <hr style="width: 100%; border: 2px solid white; margin: 20px 0;">
+
+        <a href="{% url 'player_create' %}" class="nav-btn players-btn">
+            <span class="emoji-icon">➕</span> Add New Hero
+        </a>
+
+        <a href="{% url 'index' %}" class="nav-btn scores-btn">
+            <span class="emoji-icon">🏠</span> Back to Menu
+        </a>
+    </main>
+{% endblock %}

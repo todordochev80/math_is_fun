@@ -1,3 +1,11 @@
 from django.db import models
 
-# Create your models here.
+
+
+class OperationChoices(models.TextChoices):
+    ADD = 'Add', 'Add'
+    SUBTRACT = 'Subtract', 'Subtract'
+    MULTIPLY = 'Multiply', 'Multiply'
+    DIVIDE = 'Divide', 'Divide'
+
+

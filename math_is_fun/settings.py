@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 PROJECT_APPS = [
     'pages',
     'exercises',
-    'progress'
+    'progress',
+    'players'
 ]
 INSTALLED_APPS = [
     'django.contrib.admin',

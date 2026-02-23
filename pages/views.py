@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+def index_page(request):
+    return render(request, 'index_page.html')
+
+def math_operations(request):
+    return render(request, 'math_operations.html')

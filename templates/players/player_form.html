@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <header>
+        <h1>{% if object %}✏️ Edit Hero{% else %}🌟 New Hero{% endif %}</h1>
+        <p>Enter your hero details!</p>
+    </header>
+
+    <main class="menu-list">
+        <form method="post" style="width: 100%; max-width: 400px;">
+            {% csrf_token %}
+            
+            <div style="background: white; padding: 30px; border-radius: 30px; box-shadow: 0 10px 0px rgba(0,0,0,0.05); margin-bottom: 25px;">
+                {% for field in form %}
+                    <div style="margin-bottom: 15px; text-align: left;">
+                        <label style="color: #FF5757; font-weight: bold; display: block; margin-bottom: 5px;">
+                            {{ field.label }}
+                        </label>
+                        {{ field }}
+                        
+                        {% for error in field.errors %}
+                            <small style="color: #FF5757; display: block; margin-top: 5px;">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <button type="submit" class="nav-btn players-btn" style="border: none; cursor: pointer; width: 100%;">
+                    ✅ Save Hero
+                </button>
+                
+                <a href="{% url 'player_list' %}" class="nav-btn scores-btn">
+                    ❌ Cancel
+                </a>
+            </div>
+        </form>
+    </main>
+{% endblock %}
