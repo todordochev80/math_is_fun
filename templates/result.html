@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Comfortaa', cursive;
+            background: {% if is_correct %}#7ED957{% else %}#FF5757{% endif %};
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .result-card {
+            background: white;
+            padding: 50px;
+            border-radius: 50px;
+            text-align: center;
+            box-shadow: 0 15px 0px rgba(0,0,0,0.1);
+            max-width: 500px;
+        }
+        h1 { font-size: 3rem; margin-bottom: 20px; color: #333; }
+        p { font-size: 1.5rem; color: #666; margin-bottom: 30px; }
+        .stars { font-size: 4rem; margin-bottom: 20px; }
+        .next-btn {
+            background: #5271FF;
+            color: white;
+            text-decoration: none;
+            padding: 20px 40px;
+            border-radius: 100px;
+            font-size: 1.5rem;
+            display: inline-block;
+            transition: 0.2s;
+        }
+        .next-btn:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+    <div class="result-card">
+        {% if is_correct %}
+            <div class="stars">⭐🌟⭐</div>
+            <h1>{{ message }}</h1>
+            <p>You earned 10 points! Keep going!</p>
+        {% else %}
+            <div class="stars">🎈</div>
+            <h1>{{ message }}</h1>
+            <p>Don't worry, you'll get it next time!</p>
+        {% endif %}
+
+        <a href="{% url 'play_game' child_id=child.id operation=operation %}" class="next-btn">
+            Next Question ➡️
+        </a>
+    </div>
+</body>
+</html>

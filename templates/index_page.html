@@ -14,12 +14,16 @@
         <a href="/practice" class="nav-btn practice-btn">
             <span class="emoji-icon">📝</span> Practice
         </a>
-
-        <a href="/math" class="nav-btn math-btn">
-            <span class="emoji-icon">🔢</span> Math
+        {% if current_player_id %}
+             <a href="{% url 'math_operations' child_id=current_player_id %}" class="nav-btn math-btn">
+                🔢 Math
         </a>
-
-        <a href="/scores" class="nav-btn scores-btn">
+            {% else %}
+        <a href="{% url 'player_list' %}" class="nav-btn math-btn">
+            🔢 Math (Choose a Player)
+        </a>
+{% endif %}
+        <a href={% url 'scoreboard' %} class="nav-btn scores-btn">
             <span class="emoji-icon">🏆</span> Scores
         </a>
     </main>

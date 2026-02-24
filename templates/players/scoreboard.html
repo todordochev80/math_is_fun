@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hall of Fame 🏆</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Comfortaa', cursive;
+            background: #5271FF; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 50px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 15px 0px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 { color: #5271FF; font-size: 2.5rem; margin-bottom: 30px; }
+        
+        .score-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+        .score-row {
+            background: #f8f9fa;
+            border-radius: 20px;
+            transition: transform 0.2s;
+        }
+        .score-row:hover { transform: scale(1.02); }
+        
+        .score-cell {
+            padding: 20px;
+            font-size: 1.5rem;
+        }
+        .rank { width: 60px; font-weight: bold; color: #FFBD59; }
+        .player-name { text-align: left; }
+        .stars { color: #FFD700; font-weight: bold; }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
+            background: #FF5757;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 5px 0 #d44848;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏆 Hall of Fame</h1>
+        <table class="score-table">
+            {% for player in top_players %}
+            <tr class="score-row">
+                <td class="score-cell rank">#{{ forloop.counter }}</td>
+                <td class="score-cell player-name">🌟 {{ player.name }}</td>
+                <td class="score-cell stars">{{ player.total_stars|default:0 }} ⭐</td>
+            </tr>
+            {% empty %}
+            <p>There are no scores yet. Be the first one and play!</p>
+            {% endfor %}
+        </table>
+        
+        <a href="{% url 'index' %}" class="back-btn">🏠 Back to menu</a>
+    </div>
+</body>
+</html>

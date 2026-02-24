@@ -1,39 +1,101 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if object %}Edit Hero{% else %}New Hero{% endif %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Comfortaa', cursive;
+            background: #FFBD59; /* Warm Orange */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-{% block content %}
-    <header>
-        <h1>{% if object %}✏️ Edit Hero{% else %}🌟 New Hero{% endif %}</h1>
-        <p>Enter your hero details!</p>
-    </header>
+        .form-card {
+            background: white;
+            padding: 40px;
+            border-radius: 50px;
+            box-shadow: 0 15px 0px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+        }
 
-    <main class="menu-list">
-        <form method="post" style="width: 100%; max-width: 400px;">
+        h1 { color: #333; margin-bottom: 30px; }
+
+        form p {
+            text-align: left;
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 15px;
+            border: 3px solid #eee;
+            border-radius: 20px;
+            font-family: 'Comfortaa', cursive;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus { border-color: #5271FF; }
+
+        .btn-save {
+            background: #7ED957;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #5eb03e;
+            font-family: 'Comfortaa', cursive;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-save:active { transform: translateY(4px); box-shadow: none; }
+
+        .cancel-link {
+            display: block;
+            margin-top: 20px;
+            color: #FF5757;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-card">
+        <h1>
+            {% if object %}
+                ✏️ Edit Hero
+            {% else %}
+                🌟 New Hero
+            {% endif %}
+        </h1>
+
+        <form method="post">
             {% csrf_token %}
             
-            <div style="background: white; padding: 30px; border-radius: 30px; box-shadow: 0 10px 0px rgba(0,0,0,0.05); margin-bottom: 25px;">
-                {% for field in form %}
-                    <div style="margin-bottom: 15px; text-align: left;">
-                        <label style="color: #FF5757; font-weight: bold; display: block; margin-bottom: 5px;">
-                            {{ field.label }}
-                        </label>
-                        {{ field }}
-                        
-                        {% for error in field.errors %}
-                            <small style="color: #FF5757; display: block; margin-top: 5px;">{{ error }}</small>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-            </div>
-            
-            <div style="display: flex; flex-direction: column; gap: 15px;">
-                <button type="submit" class="nav-btn players-btn" style="border: none; cursor: pointer; width: 100%;">
-                    ✅ Save Hero
-                </button>
-                
-                <a href="{% url 'player_list' %}" class="nav-btn scores-btn">
-                    ❌ Cancel
-                </a>
-            </div>
+            {{ form.as_p }}
+
+            <button type="submit" class="btn-save">
+                {% if object %}Save Changes{% else %}Create Hero!{% endif %}
+            </button>
         </form>
-    </main>
-{% endblock %}
+
+        <a href="{% url 'player_list' %}" class="cancel-link">❌ Cancel</a>
+    </div>
+
+</body>
+</html>

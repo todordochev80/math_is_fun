@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Progress 📈</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Comfortaa', cursive;
+            background: #FFBD59; /* Жълт фон като в менюто ти */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 50px;
+            box-shadow: 0 15px 0px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 { color: #333; margin-bottom: 10px; }
+        .subtitle { color: #666; margin-bottom: 30px; }
+
+        .total-stars-box {
+            background: #fdf2d0;
+            padding: 20px;
+            border-radius: 30px;
+            border: 4px dashed #FFBD59;
+            margin-bottom: 30px;
+        }
+        .total-stars-box span {
+            font-size: 2.5rem;
+            color: #cc9647;
+            display: block;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border: 2px solid #eee;
+        }
+
+        .op-name {
+            font-size: 1.5rem;
+            color: #5271FF;
+            font-weight: bold;
+        }
+
+        .details {
+            text-align: right;
+        }
+
+        .points {
+            display: block;
+            font-size: 1.2rem;
+            color: #cc9647;
+        }
+
+        .count {
+            display: block;
+            font-size: 0.9rem;
+            background: #7ED957;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-top: 5px;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 20px;
+            background: #5271FF;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 6px 0 #3d55bf;
+            transition: all 0.2s;
+        }
+
+        .btn-back:active { transform: translateY(4px); box-shadow: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Great job, {{ player.name }}! 🌟</h1>
+        <p class="subtitle">Here is your practice progress:</p>
+
+        <div class="total-stars-box">
+            <small>Total stars earned:</small>
+            <span>
+                {% if stats %}
+                    {% widthratio 1 1 0 as total %} 
+                    ⭐
+                {% else %}
+                    0 ⭐
+                {% endif %}
+            </span>
+        </div>
+
+        <div class="stats-list">
+            {% for stat in stats %}
+            <div class="stat-card">
+                <span class="op-name">{{ stat.operation_type }}</span>
+                <div class="details">
+                    <span class="points">{{ stat.total_points }} ⭐</span>
+                    <span class="count">{{ stat.total_solved }} exercises solved</span>
+                </div>
+            </div>
+            {% empty %}
+            <p>Go solve some math problems to see your stats! 🚀</p>
+            {% endfor %}
+        </div>
+
+        <a href="{% url 'index' %}" class="btn-back">Back to Menu</a>
+    </div>
+
+</body>
+</html>

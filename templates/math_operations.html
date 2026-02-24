@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Comfortaa', cursive;
-            background: #5CE1E6; /* Different background color (Light Blue) for this section */
+            background: #5CE1E6; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -52,7 +52,7 @@
             margin-bottom: 30px;
         }
 
-        /* 4 BUTTONS GRID */
+        
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -77,7 +77,7 @@
         .card:hover { transform: translateY(-10px); }
         .card:active { transform: translateY(5px); box-shadow: 0 3px 0px rgba(0,0,0,0.1); }
 
-        /* Operation Colors */
+       
         .add { background-color: #7ED957; }
         .sub { background-color: #FF66C4; }
         .mult { background-color: #FFBD59; }
@@ -93,29 +93,29 @@
 <body>
 
     <div class="container">
-        <a href="/" class="back-home">🏠 Back Home</a>
+        <a href="{% url 'index' %}" class="back-home">🏠 Back Home</a>
 
         <header>
-            <h1>Pick a Game!</h1>
+            <h1>Pick a Game, {{ child.name }}!</h1>
         </header>
 
         <main class="grid">
-            <a href="/addition" class="card add">
+            <a href="{% url 'play_game' child_id=child.id operation='ADD' %}" class="card add">
                 <span class="icon">🍎+🍎</span>
                 Addition
             </a>
 
-            <a href="/subtraction" class="card sub">
+            <a href="{% url 'play_game' child_id=child.id operation='SUBTRACT' %}" class="card sub">
                 <span class="icon">🍉-🍉</span>
                 Subtraction
             </a>
 
-            <a href="/multiplication" class="card mult">
+            <a href="{% url 'play_game' child_id=child.id operation='MULTIPLY' %}" class="card mult">
                 <span class="icon">🍭×🍭</span>
                 Multiplication
             </a>
 
-            <a href="/division" class="card divi">
+            <a href="{% url 'play_game' child_id=child.id operation='DIVIDE' %}" class="card divi">
                 <span class="icon">🍕÷🍕</span>
                 Division
             </a>

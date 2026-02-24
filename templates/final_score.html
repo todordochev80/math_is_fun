@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Accomplished!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Comfortaa', cursive;
+            background: #FFBD59; /* Златист цвят за финал */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .final-card {
+            background: white;
+            padding: 60px;
+            border-radius: 50px;
+            box-shadow: 0 20px 0px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 10px solid #FF914D;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        h1 { color: #333; font-size: 3rem; margin-bottom: 20px; }
+        
+        .hero-name { color: #5271FF; font-size: 2rem; }
+
+        .trophy { font-size: 6rem; margin: 20px 0; }
+
+        .score-info {
+            font-size: 1.8rem;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            border-radius: 100px;
+            transition: transform 0.2s;
+            display: block;
+            font-weight: bold;
+        }
+
+        .play-again {
+            background: #7ED957;
+            color: white;
+            box-shadow: 0 8px 0px #5eb03e;
+        }
+
+        .go-home {
+            background: #5271FF;
+            color: white;
+            box-shadow: 0 8px 0px #3d55bf;
+        }
+
+        .nav-btn:hover { transform: scale(1.05); }
+        .nav-btn:active { transform: translateY(4px); box-shadow: none; }
+    </style>
+</head>
+<body>
+
+    <div class="final-card">
+        <div class="trophy">🏆</div>
+        <h1>WOW!</h1>
+        <div class="hero-name">{{ child.name }}</div>
+        
+        <p class="score-info">
+            You did it!!!<br>
+            It's time for new game
+        </p>
+
+        <div class="button-group">
+            
+            <a href="{% url 'math_operations' child_id=child.id %}" class="nav-btn play-again">
+                🎮 Choose another game
+            </a>
+            
+            <a href="{% url 'index' %}" class="nav-btn go-home">
+                🏠 Main menu
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

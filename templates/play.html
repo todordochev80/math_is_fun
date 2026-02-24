@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ operation|title }} Adventure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Comfortaa', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+
+            background: {% if operation == 'ADD' %}#7ED957{% elif operation == 'SUBTRACT' %}#FF66C4{% elif operation == 'MULTIPLY' %}#FFBD59{% else %}#5271FF{% endif %};
+            transition: background 0.5s;
+        }
+
+        .game-card {
+            background: white;
+            padding: 40px;
+            border-radius: 40px;
+            box-shadow: 0 15px 0px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 8px solid rgba(0,0,0,0.05);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .back-link { text-decoration: none; color: #888; font-size: 0.9rem; margin-bottom: 20px; display: block; }
+
+        h1 { color: #333; margin-bottom: 30px; }
+
+        .math-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .num-box {
+            width: 80px;
+            height: 80px;
+            background: #f8f8f8;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: inset 0 4px 0 rgba(0,0,0,0.05);
+        }
+
+        .symbol {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: {% if operation == 'ADD' %}#7ED957{% elif operation == 'SUBTRACT' %}#FF66C4{% elif operation == 'MULTIPLY' %}#FFBD59{% else %}#5271FF{% endif %};
+        }
+
+        .answer-input {
+            width: 100px;
+            height: 80px;
+            border: 4px solid #eee;
+            border-radius: 20px;
+            font-size: 2.5rem;
+            text-align: center;
+            font-family: 'Comfortaa', cursive;
+            outline: none;
+        }
+
+        .answer-input:focus { border-color: #FFBD59; }
+
+        .check-btn {
+            background: #FF5757;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 0px #d44848;
+            font-family: 'Comfortaa', cursive;
+            transition: transform 0.1s;
+        }
+
+        .check-btn:active { transform: translateY(4px); box-shadow: none; }
+    </style>
+</head>
+<body>
+
+    <div class="game-card">
+        <a href="{% url 'math_operations' child_id=child.id %}" class="back-link">⬅ Back to games options</a>
+
+        <h1>
+            {% if operation == 'ADD' %}🍎 Addition{% elif operation == 'SUBTRACT' %}🍉 Subtract{% elif operation == 'MULTIPLY' %}🍭 Multiply{% else %}🍕 Divide{% endif %}
+        </h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="math-row">
+                <div class="num-box">{{ num1 }}</div>
+                <div class="symbol">{{ symbol }}</div>
+                <div class="num-box">{{ num2 }}</div>
+                <div class="symbol">=</div>
+                <input type="number" name="user_answer" class="answer-input" required autofocus>
+            </div>
+            <button type="submit" class="check-btn">Check! 🚀</button>
+        </form>
+    </div>
+
+</body>
+</html>
